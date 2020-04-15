@@ -1,0 +1,110 @@
+.container-1 {
+  border: 1px solid red;
+  width: 75%;
+  margin: 0 auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-blackjack-row-1 {
+  display: flex;
+  border: 1px solid black;
+  padding: 10px;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+  justify-content: space-around;
+}
+
+.flex-blackjack-row-2 {
+  display: flex;
+  border-top: 2px dashed white;
+  padding: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+  background-color: rgb(9, 89, 2);
+  color: white;
+}
+
+.balance input{
+  width: 50px;
+  outline: none;
+}
+
+
+.flex-blackjack-row-3 {
+  display: flex;
+  border: 1px solid black;
+  padding: 10px;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+
+.right {
+  display: flex;
+  flex-direction: column;
+}
+
+.balance {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+}
+.flex-blackjack-row-1 {
+  background-color: rgb(9, 89, 2);
+  color: white;
+  height: 500px;
+}
+
+.flex-blackjack-row-1 div {
+  padding: 10px;
+  flex: 1;
+  text-align: center;
+  padding-bottom: 0px;
+}
+
+.flex-blackjack-row-1 img {
+  width: 12%;
+  padding: 10px;
+  border-radius: 17%;
+}
+
+.flex-blackjack-row-2 button {
+  border: 1px solid black;
+}
+
+.bet-select {
+  display: flex;
+  flex-direction: row;
+}
+
+.wallet {
+  display: flex;
+  flex-direction: column;
+  height: 50px;
+}
+
+.wallet p {
+  margin: 0px;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  width: 50%;
+}
+.flex-blackjack-row-2 div {
+  padding: 5px;
+  height: 50px;
+}
+
+.flex-blackjack-row-3 table, th, td {
+  padding: 5px;
+  border: 1px solid black;
+}

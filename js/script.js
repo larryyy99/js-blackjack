@@ -39,7 +39,7 @@ function generateDeck() {
       var completeCard = {
         title: `${card}${sign}`,
         value: blackjackGame["cardsMap"][card],
-        sign: card
+        sign: card,
       };
       blackjackGame["deck"].push(completeCard);
     });
@@ -47,13 +47,16 @@ function generateDeck() {
 }
 generateDeck();
 
-Array.prototype.remove = function() {
-  var what, a = arguments, L = a.length, ax;
+Array.prototype.remove = function () {
+  var what,
+    a = arguments,
+    L = a.length,
+    ax;
   while (L && this.length) {
-      what = a[--L];
-      while ((ax = this.indexOf(what)) !== -1) {
-          this.splice(ax, 1);
-      }
+    what = a[--L];
+    while ((ax = this.indexOf(what)) !== -1) {
+      this.splice(ax, 1);
+    }
   }
   return this;
 };
@@ -75,6 +78,11 @@ const lossSound = new Audio("sounds/aww.mp3");
 const flipSound = new Audio("sounds/flip.wav");
 const chipSound = new Audio("sounds/chip.mp3");
 const errorSound = new Audio("sounds/error.mp3");
+
+const backgroundMusic = new Audio("sounds/background_music.mp3");
+backgroundMusic.volume = 0.3;
+backgroundMusic.play();
+backgroundMusic.loop = true;
 
 document
   .querySelector("#blackjack-hit-button")
@@ -226,10 +234,10 @@ function blackjackDeal() {
 function randomCard() {
   let numberOfCardsInDeck = cardPool.length;
   let randomIndex = Math.floor(Math.random() * numberOfCardsInDeck);
-  
+
   let randomCard = cardPool[randomIndex];
   cardPool.remove(randomCard);
-  
+
   return randomCard;
 }
 
@@ -356,5 +364,25 @@ function showResult(winner) {
 
     document.querySelector("#blackjack-result").textContent = message;
     document.querySelector("#blackjack-result").style.color = messageColor;
+  }
+}
+
+function updateBackgroundMusicStateChangeIcon() {
+  if (backgroundMusic.paused) {
+    backgroundMusic.play();
+    document
+      .querySelector(".btn-play-background")
+      .classList.remove("volume-control-hidden");
+    document
+      .querySelector(".btn-mute-background")
+      .classList.add("volume-control-hidden");
+  } else {
+    backgroundMusic.pause();
+    document
+      .querySelector(".btn-mute-background")
+      .classList.remove("volume-control-hidden");
+    document
+      .querySelector(".btn-play-background")
+      .classList.add("volume-control-hidden");
   }
 }

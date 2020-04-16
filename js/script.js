@@ -186,22 +186,33 @@ function sleep(ms) {
 
 async function dealerLogic() {
   if (blackjackGame['gameStarted'] === true) {
-  document.getElementById("blackjack-stand-button").disabled = true;
-  blackjackGame['isStand'] = true;
-  let dealerImages = document.querySelector('#dealer-box').querySelectorAll('img');
-  dealerImages[1].remove();
+    document.getElementById("blackjack-stand-button").disabled = true;
+    blackjackGame['isStand'] = true;
+    let dealerImages = document.querySelector('#dealer-box').querySelectorAll('img');
+    dealerImages[1].remove();
 
-  while (blackjackGame['isStand'] === true && (DEALER['score'] < YOU['score'] || DEALER['score'] < 16 )) {
+    while (blackjackGame['isStand'] === true && (DEALER['score'] < YOU['score'] || DEALER['score'] < 16 )) {
+      if (YOU['score'] > 21) {
+        await showCardToADealerAndUpdateScore();
+        blackjackGame['turnsOver'] = true;
+        let winner = computeWinner();
+        showResult(winner);
+        return;
+      }
+      await showCardToADealerAndUpdateScore();
+    }
+
+    blackjackGame['turnsOver'] = true;
+    let winner = computeWinner();
+    showResult(winner);
+  }
+
+  async function showCardToADealerAndUpdateScore() {
     let card = randomCard();
     showCard(card, DEALER);
     updateScore(card, DEALER);
     showScore(DEALER);
     await sleep(1000);
-  }
-
-  blackjackGame['turnsOver'] = true;
-  let winner = computeWinner();
-  showResult(winner);
   }
 }
 

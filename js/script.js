@@ -27,7 +27,7 @@ let blackjackGame = {
   losses: 0,
   draws: 0,
   isStand: false,
-  turnsOver: true,
+  turnsOver: false,
   gameStarted: false,
   betMade: false,
   cardRemoved: false,
@@ -61,12 +61,11 @@ Array.prototype.remove = function() {
 let cardPool = blackjackGame["deck"];
 
 let wallet = {
-  balance: 100,
+  balance: 1000,
   bet: 0,
   balanceSpan: "#balance-span",
   betSpan: "#bet-span",
 };
-
 const YOU = blackjackGame["you"];
 const DEALER = blackjackGame["dealer"];
 
@@ -80,6 +79,9 @@ const errorSound = new Audio("sounds/error.mp3");
 document
   .querySelector("#blackjack-hit-button")
   .addEventListener("click", blacjackHit);
+document
+  .querySelector("#blackjack-start-button")
+  .addEventListener("click", blackjackGameStart);
 document
   .querySelector("#blackjack-deal-button")
   .addEventListener("click", blackjackDeal);
@@ -143,7 +145,7 @@ function blackjackGameStart() {
 function blacjackHit() {
   if (
     blackjackGame["isStand"] === false &&
-    blackjackGame["turnsOver"] === false &&
+    blackjackGame["gameStarted"] === true &&
     blackjackGame["betMade"]
   ) {
     if (blackjackGame["cardRemoved"] === false) {
@@ -224,10 +226,10 @@ function blackjackDeal() {
 function randomCard() {
   let numberOfCardsInDeck = cardPool.length;
   let randomIndex = Math.floor(Math.random() * numberOfCardsInDeck);
-
+  
   let randomCard = cardPool[randomIndex];
   cardPool.remove(randomCard);
-
+  
   return randomCard;
 }
 
@@ -247,8 +249,6 @@ function showScore(activePlayer) {
   if (activePlayer["score"] > 21) {
     document.querySelector(activePlayer["scoreSpan"]).textContent = "BUST!";
     document.querySelector(activePlayer["scoreSpan"]).style.color = "red";
-    document.getElementById("blackjack-start-button").disabled = true;
-    dealerLogic();
   } else {
     document.querySelector(activePlayer["scoreSpan"]).textContent =
       activePlayer["score"];
@@ -260,7 +260,7 @@ function sleep(ms) {
 }
 
 async function dealerLogic() {
-  if (blackjackGame["turnsOver"] === false) {
+  if (blackjackGame["gameStarted"] === true) {
     document.getElementById("blackjack-stand-button").disabled = true;
     blackjackGame["isStand"] = true;
     let dealerImages = document

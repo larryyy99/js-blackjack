@@ -5,6 +5,7 @@
   text-align: center;
   display: flex;
   flex-direction: column;
+  height: 100;
 }
 
 .flex-blackjack-row-1 {
@@ -14,6 +15,7 @@
   flex-wrap: wrap;
   flex-direction: column-reverse;
   justify-content: space-around;
+
 }
 
 .flex-blackjack-row-2 {
@@ -68,7 +70,7 @@
 }
 
 .flex-blackjack-row-1 img {
-  width: 12%;
+  width: 8%;
   padding: 10px;
   border-radius: 17%;
 }

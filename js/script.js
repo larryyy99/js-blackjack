@@ -228,6 +228,7 @@ function randomCard() {
   let randomIndex = Math.floor(Math.random() * numberOfCardsInDeck);
   
   let randomCard = cardPool[randomIndex];
+  cardPool.remove(randomCard);
   
   return randomCard;
 }
